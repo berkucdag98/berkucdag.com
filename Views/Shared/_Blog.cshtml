@@ -1,0 +1,152 @@
+﻿@using DataAccess.Models;
+@using DataAccess.Models.ExtraModels;
+@using DataAccess.Applications;
+@{
+    string nameSurname = "";
+    bool isAuthenticated = User.Identity.IsAuthenticated;
+    if (isAuthenticated == true)
+    {
+        BlogRepository blogRepository = new BlogRepository(new DBContext());
+        nameSurname = blogRepository.GetUserByEmail(User.Identity.Name).NameSurname;
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="TemplateMo">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
+
+    <title>Berk Üçdağ Blog</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets/css/templatemo-stand-blog.css">
+    <link rel="stylesheet" href="/assets/css/owl.css">
+    <!--
+
+    TemplateMo 551 Stand Blog
+
+    https://templatemo.com/tm-551-stand-blog
+
+    -->
+</head>
+
+<body>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+    <!-- Header -->
+    <header class="">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="@Url.Action("Index", "Blog")"><h2>Berk Üçdağ<em>.</em></h2></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        @if (isAuthenticated == true)
+                        {
+                            <li class="nav-item">
+                                <b class="nav-link">Hoşgeldin @nameSurname</b>
+                            </li>
+                        }
+                        <li class="nav-item active">
+                            <a class="nav-link" href="@Url.Action("Index", "Blog")">
+                                Ana Sayfa
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "Home")">Hakkımda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Contact", "Blog")">Iletisim</a>
+                        </li>
+                        @if (isAuthenticated == true)
+                        {
+                            <li class="nav-item">
+                                <form class="form-inline my-2 my-lg-0" action="@Url.Action("Logout", "Blog")" method="post">
+                                    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Çıkış Yap</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a href="@Url.Action("Login", "Blog")" class="btn btn-outline-warning">Giriş Yap</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("CreateUser", "Blog")" class="btn btn-outline-success">Kayıt Ol</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    @RenderBody()
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="social-icons">
+                        <li><a href="https://twitter.com/berkucdagg" target="_blank">Twitter</a></li>
+                        <li><a href="https://www.instagram.com/berkucdag/" target="_blank">Instagram</a></li>
+                        <li><a href="https://www.linkedin.com/in/berk-%C3%BC%C3%A7da%C4%9F-65a32614a/" target="_blank">Linkedin</a></li>
+                        <li><a href="https://github.com/berkucdag98" target="_blank">Github</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-12">
+                    <div class="copyright-text">
+                        <p>
+                            <script>document.write(new Date().getFullYear())</script> &copy; Berk Üçdağ. Tüm Hakları Saklıdır.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Additional Scripts -->
+    <script src="/assets/js/custom.js"></script>
+    <script src="/assets/js/owl.js"></script>
+    <script src="/assets/js/slick.js"></script>
+    <script src="/assets/js/isotope.js"></script>
+    <script src="/assets/js/accordions.js"></script>
+
+    <script language="text/Javascript">
+        cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+        function clearField(t) {                   //declaring the array outside of the
+            if (!cleared[t.id]) {                      // function makes it static and global
+                cleared[t.id] = 1;  // you could use true and false, but that's more typing
+                t.value = '';         // with more chance of typos
+                t.style.color = '#fff';
+            }
+        }
+    </script>
+
+</body>
+</html>
