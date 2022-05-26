@@ -11,7 +11,7 @@
                 @foreach (var item in Model.HomeOneCikan)
                 {
                     <div class="item">
-                        <img src="@item.ImageUrl" alt="">
+                        <img src="@item.ImageUrl" alt="" onclick="@Url.Action("BlogDetail", "Blog",new { blogId = item.Id})">
                         <div class="item-content">
                             <div class="main-content">
                                 <div class="meta-category">
