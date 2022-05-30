@@ -27,7 +27,7 @@
                             <div class="col-lg-6">
                                 <div class="blog-post">
                                     <div class="blog-thumb">
-                                        <img src="@itemBlog.blog.ImageUrl" alt="">
+                                        <img src="@itemBlog.blog.ImageUrl" style="height:200px;" alt="">
                                     </div>
                                     <div class="down-content">
                                         <span>@itemBlog.blog.Head</span>
@@ -37,7 +37,7 @@
                                             <li><a href="#">@itemBlog.blog.PublishDate.ToString("dd/MM/yyyy")</a></li>
                                             <li><a href="#">@itemBlog.CommentNumber Yorum</a></li>
                                         </ul>
-                                        <p>@itemBlog.blog.FullDescription ...</p>
+                                        <p>@Html.Raw(itemBlog.blog.FullDescription) ...</p>
                                         <div class="post-options">
                                             <div class="row">
                                                 <div class="col-lg-12">
