@@ -39,7 +39,7 @@
                                         <li><a href="#">@Model.GetBlog.CommentNumber Yorum</a></li>
                                     </ul>
                                     <p>
-                                        @Model.GetBlog.blog.FullDescription
+                                        @Html.Raw(Model.GetBlog.blog.FullDescription)
                                     </p>
                                     <div class="post-options">
                                         <div class="row">
